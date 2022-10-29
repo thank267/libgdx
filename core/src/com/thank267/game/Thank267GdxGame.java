@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -36,7 +37,7 @@ public class Thank267GdxGame extends ApplicationAdapter {
 	private OrthographicCamera camera;
 	private OrthogonalTiledMapRenderer mapRenderer;
 	private float x,y;
-	private int dir = 0, step =1;
+	private int dir = 0, step = 1;
 
 
 	@Override
@@ -71,7 +72,7 @@ public class Thank267GdxGame extends ApplicationAdapter {
 
 		def.type = BodyDef.BodyType.DynamicBody;
 		env = map.getLayers().get("dyn");
-		rect = env.getObjects().getByType(RectangleMapObject.class);
+		rect =  env.getObjects().getByType(RectangleMapObject.class);
 		for (int i = 0; i < rect.size; i++) {
 			float x = rect.get(i).getRectangle().x;
 			float y = rect.get(i).getRectangle().y;
@@ -79,18 +80,18 @@ public class Thank267GdxGame extends ApplicationAdapter {
 			float h = rect.get(i).getRectangle().height / 2;
 			def.position.set(x, y);
 			shape.setAsBox(w, h);
-			fdef.density = 1;
+			fdef.density = (float) rect.get(i).getProperties().get("density");;
 			fdef.friction = 0;
 			fdef.restitution = 1;
+
 			physX.world.createBody(def).createFixture(fdef).setUserData("Kubik");
+
 		}
 
 		env = map.getLayers().get("hero");
 		RectangleMapObject hero = (RectangleMapObject) env.getObjects().get("Hero");
-
-
-		float x = hero.getRectangle().x;
-		float y = hero.getRectangle().y;
+		float x = hero.getRectangle().x + hero.getRectangle().width / 2;
+		float y = hero.getRectangle().y + hero.getRectangle().height / 2;
 		float w = hero.getRectangle().width / 2;
 		float h = hero.getRectangle().height / 2;
 		def.position.set(x, y);
@@ -106,10 +107,11 @@ public class Thank267GdxGame extends ApplicationAdapter {
 
 		batch = new SpriteBatch();
 
-		run = new FirstAnim("atlas/digger.atlas", "run", 25, Animation.PlayMode.LOOP);
-		stand = new FirstAnim("atlas/digger.atlas", "stand", 25, Animation.PlayMode.LOOP);
+		run = new FirstAnim("atlas/digger.atlas", "run", 25, true,"mixkit-striking-jump-rope-2100.mp3");
+		stand = new FirstAnim("atlas/digger.atlas", "stand", 25, true,"mixkit-striking-jump-rope-2100.mp3");
 		sound = Gdx.audio.newSound(Gdx.files.internal("Mouse-Click-03-c-FesliyanStudios.com.mp3"));
 		music = Gdx.audio.newMusic(Gdx.files.internal("01. Tandava.mp3"));
+		tmpA = stand;
 
 		thank267InputProcessor = new Thank267InputProcessor();
 		Gdx.input.setInputProcessor(thank267InputProcessor);
@@ -124,7 +126,6 @@ public class Thank267GdxGame extends ApplicationAdapter {
 
 		camera.position.x = body.getPosition().x;
 		camera.position.y = body.getPosition().y;
-		camera.zoom = 0.5f;
 		camera.update();
 
 		mapRenderer.setView(camera);
@@ -133,15 +134,17 @@ public class Thank267GdxGame extends ApplicationAdapter {
 		tmpA = stand;
 		dir = 0;
 
-		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {sound.play(10, 1, 0);}
+		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {sound.play(100, 1, 0);}
 
 		if (thank267InputProcessor.getOutString().contains("A")) {
 			dir = -1;
 			tmpA = run;
+			body.applyForceToCenter(new Vector2(-10000, 0f), true);
 		}
 		if (thank267InputProcessor.getOutString().contains("D")) {
 			dir = 1;
 			tmpA = run;
+			body.applyForceToCenter(new Vector2(10000, 0f), true);
 		}
 		if (thank267InputProcessor.getOutString().contains("W")) y++;
 		if (thank267InputProcessor.getOutString().contains("S")) y--;
@@ -161,12 +164,22 @@ public class Thank267GdxGame extends ApplicationAdapter {
 		music.setLooping(true);
 		music.play();
 
+		float x = body.getPosition().x;
+		float y = body.getPosition().y;
+
+		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		batch.draw(tmpA.draw(), x, y);
 		batch.end();
 
 		physX.step();
 		physX.debugDraw(camera);
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		camera.viewportHeight = height;
+		camera.viewportWidth = width;
 	}
 
 	@Override
