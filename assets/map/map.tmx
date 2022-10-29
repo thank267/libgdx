@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="8" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="26">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="22" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="31">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
  <tileset firstgid="1" name="map" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
   <image source="map.png" width="1024" height="1024"/>
  </tileset>
- <layer id="1" name="Слой тайлов 1" width="32" height="8">
+ <layer id="1" name="t0" width="32" height="22">
   <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -19,56 +33,185 @@
 </data>
  </layer>
  <objectgroup id="4" name="env">
-  <object id="8" x="7" y="80" width="246" height="7"/>
-  <object id="9" x="264" y="45" width="279" height="10"/>
-  <object id="10" x="550" y="106" width="472" height="14"/>
+  <properties>
+   <property name="BodyType" value="StaticBody"/>
+   <property name="density" type="float" value="1"/>
+   <property name="friction" type="float" value="0"/>
+   <property name="gravityScale" type="float" value="1"/>
+   <property name="restitution" type="float" value="0.25"/>
+  </properties>
+  <object id="8" x="7" y="525.348" width="246" height="7">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="9" x="264" y="490.348" width="279" height="10">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="10" x="550" y="551.348" width="472" height="14">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="26" x="0" y="0" width="1024" height="12">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="27" x="1" y="690" width="1024" height="12">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="28" x="0" y="1" width="7" height="697">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="29" x="1016.5" y="1.5" width="7" height="697">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="30" x="545.674" y="495.937" width="8.40792" height="55.4922">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup id="8" name="dyn">
-  <object id="19" x="193" y="-263" width="24" height="24">
+ <objectgroup id="8" name="dyn" visible="0">
+  <object id="19" x="193" y="185" width="24" height="24">
    <properties>
+    <property name="BodyType" value="DynamicBody"/>
     <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="20" x="727" y="-286" width="24" height="24">
+  <object id="20" x="727" y="162" width="24" height="24">
    <properties>
+    <property name="BodyType" value="DynamicBody"/>
     <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="21" x="74" y="-80" width="24" height="24">
+  <object id="21" x="74" y="368" width="24" height="24">
    <properties>
+    <property name="BodyType" value="DynamicBody"/>
     <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="22" x="173" y="-180" width="66" height="46">
+  <object id="22" x="173" y="268" width="66" height="46">
    <properties>
+    <property name="BodyType" value="DynamicBody"/>
     <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="23" x="663" y="-200" width="57" height="50">
+  <object id="23" x="663" y="248" width="57" height="50">
    <properties>
+    <property name="BodyType" value="DynamicBody"/>
     <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="24" x="370" y="-124" width="59" height="38">
+  <object id="24" x="370" y="324" width="59" height="38">
    <properties>
+    <property name="BodyType" value="DynamicBody"/>
     <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="25" x="865" y="-251" width="69" height="50">
+  <object id="25" x="865" y="197" width="69" height="50">
    <properties>
+    <property name="BodyType" value="DynamicBody"/>
     <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="7" name="hero">
-  <object id="17" name="Hero" x="464" y="-197" width="24" height="24">
+ <objectgroup id="7" name="hero" visible="0">
+  <properties>
+   <property name="BodyType" value="DynamicBody"/>
+   <property name="density" type="float" value="1"/>
+   <property name="friction" type="float" value="0"/>
+   <property name="gravityScale" type="float" value="1"/>
+   <property name="restitution" type="float" value="0.25"/>
+  </properties>
+  <object id="17" name="Hero" x="464" y="251" width="24" height="24">
    <properties>
+    <property name="BodyType" value="DynamicBody"/>
     <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
  </objectgroup>
- <layer id="2" name="Слой тайлов 2" width="32" height="8">
+ <layer id="2" name="front" width="32" height="22">
   <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,856,856,856,856,856,856,856,856,856,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 856,856,856,856,856,856,856,856,0,887,0,0,887,0,0,887,0,856,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

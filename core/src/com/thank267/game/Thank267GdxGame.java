@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -21,9 +22,11 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.thank267.game.anim.FirstAnim;
+import com.thank267.game.enums.Actions;
 import com.thank267.game.input.Thank267InputProcessor;
 import com.thank267.game.physics.PhysX;
 
+import java.util.HashMap;
 
 public class Thank267GdxGame extends ApplicationAdapter {
 	private SpriteBatch batch;
@@ -33,77 +36,24 @@ public class Thank267GdxGame extends ApplicationAdapter {
 	private PhysX physX;
 	private Body body;
 	private TiledMap map;
+	private HashMap<Actions, FirstAnim> manAssetss;
 	private Thank267InputProcessor thank267InputProcessor;
 	private OrthographicCamera camera;
 	private OrthogonalTiledMapRenderer mapRenderer;
-	private float x,y;
-	private int dir = 0, step = 1;
-
+	private Actions actions;
 
 	@Override
 	public void create () {
 
-		map = new TmxMapLoader().load("map/map.tmx");
-		mapRenderer = new OrthogonalTiledMapRenderer(map);
-
 		physX = new PhysX();
 
-		BodyDef def = new BodyDef();
-		FixtureDef fdef = new FixtureDef();
-		PolygonShape shape = new PolygonShape();
-
-		def.type = BodyDef.BodyType.StaticBody;
-		fdef.shape = shape;
-		fdef.density = 1;
-		fdef.friction = 0;
-		fdef.restitution = 1;
-
-		MapLayer env = map.getLayers().get("env");
-		Array<RectangleMapObject> rect = env.getObjects().getByType(RectangleMapObject.class);
-		for (int i = 0; i < rect.size; i++) {
-			float x = rect.get(i).getRectangle().x;
-			float y = rect.get(i).getRectangle().y;
-			float w = rect.get(i).getRectangle().width / 2;
-			float h = rect.get(i).getRectangle().height / 2;
-			def.position.set(x, y);
-			shape.setAsBox(w, h);
-			physX.world.createBody(def).createFixture(fdef).setUserData("Kubik");
+		Array<RectangleMapObject> objects = map.getLayers().get("env").getObjects().getByType(RectangleMapObject.class);
+		objects.addAll(map.getLayers().get("dyn").getObjects().getByType(RectangleMapObject.class));
+		for (int i = 0; i < objects.size; i++) {
+			physX.addObject(objects.get(i));
 		}
-
-		def.type = BodyDef.BodyType.DynamicBody;
-		env = map.getLayers().get("dyn");
-		rect =  env.getObjects().getByType(RectangleMapObject.class);
-		for (int i = 0; i < rect.size; i++) {
-			float x = rect.get(i).getRectangle().x;
-			float y = rect.get(i).getRectangle().y;
-			float w = rect.get(i).getRectangle().width / 2;
-			float h = rect.get(i).getRectangle().height / 2;
-			def.position.set(x, y);
-			shape.setAsBox(w, h);
-			fdef.density = (float) rect.get(i).getProperties().get("density");;
-			fdef.friction = 0;
-			fdef.restitution = 1;
-
-			physX.world.createBody(def).createFixture(fdef).setUserData("Kubik");
-
-		}
-
-		env = map.getLayers().get("hero");
-		RectangleMapObject hero = (RectangleMapObject) env.getObjects().get("Hero");
-		float x = hero.getRectangle().x + hero.getRectangle().width / 2;
-		float y = hero.getRectangle().y + hero.getRectangle().height / 2;
-		float w = hero.getRectangle().width / 2;
-		float h = hero.getRectangle().height / 2;
-		def.position.set(x, y);
-		shape.setAsBox(w, h);
-		fdef.shape = shape;
-		fdef.density = 1;
-		fdef.friction = 0;
-		fdef.restitution = 1;
-		body = physX.world.createBody(def);
-		body.createFixture(fdef).setUserData("Kubik");
-
-		shape.dispose();
+		body = physX.addObject((RectangleMapObject) map.getLayers().get("hero").getObjects().get("Hero"));
+		body.setFixedRotation(true);
 
 		batch = new SpriteBatch();
 
@@ -122,7 +72,7 @@ public class Thank267GdxGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(0, 0, 0, 1);
+		ScreenUtils.clear(Color.BLACK);
 
 		camera.position.x = body.getPosition().x;
 		camera.position.y = body.getPosition().y;
@@ -131,62 +81,36 @@ public class Thank267GdxGame extends ApplicationAdapter {
 		mapRenderer.setView(camera);
 		mapRenderer.render();
 
-		tmpA = stand;
-		dir = 0;
+		manAssetss.get(actions).setTime(Gdx.graphics.getDeltaTime());
+		body.applyForceToCenter(thank267InputProcessor.getVector(), true);
 
-		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {sound.play(100, 1, 0);}
+		if (body.getLinearVelocity().len() < 0.6f) actions = Actions.STAND;
+		else if (Math.abs(body.getLinearVelocity().x) > 0.6f) {actions = Actions.RUN;}
 
-		if (thank267InputProcessor.getOutString().contains("A")) {
-			dir = -1;
-			tmpA = run;
-			body.applyForceToCenter(new Vector2(-10000, 0f), true);
-		}
-		if (thank267InputProcessor.getOutString().contains("D")) {
-			dir = 1;
-			tmpA = run;
-			body.applyForceToCenter(new Vector2(10000, 0f), true);
-		}
-		if (thank267InputProcessor.getOutString().contains("W")) y++;
-		if (thank267InputProcessor.getOutString().contains("S")) y--;
+		manAssetss.get(actions).setTime(Gdx.graphics.getDeltaTime());
+		if (!manAssetss.get(actions).draw().isFlipX() & body.getLinearVelocity().x < -0.6f) {manAssetss.get(actions).draw().flip(true, false);}
+		if (manAssetss.get(actions).draw().isFlipX() & body.getLinearVelocity().x > 0.6f) {manAssetss.get(actions).draw().flip(true, false);}
 
-
-		if (dir == -1) x-=step;
-		if (dir == 1) x+=step;
-
-		if (!tmpA.draw().isFlipX() & dir == -1) {tmpA.draw().flip(true, false);}
-		if (!stand.draw().isFlipX() & dir == -1) {stand.draw().flip(true, false);}
-		if (tmpA.draw().isFlipX() & dir == 1) tmpA.draw().flip(true, false);
-		if (stand.draw().isFlipX() & dir == 1) stand.draw().flip(true, false);
-
-		tmpA.setTime(Gdx.graphics.getDeltaTime());
-
-		music.setVolume(0.5f);
-		music.setLooping(true);
-		music.play();
-
-		float x = body.getPosition().x;
-		float y = body.getPosition().y;
+		float x = body.getPosition().x - 2.5f/camera.zoom;
+		float y = body.getPosition().y - 2.5f/camera.zoom;
 
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		batch.draw(tmpA.draw(), x, y);
+		batch.draw(manAssetss.get(actions).draw(), x, y);
 		batch.end();
 
+		Gdx.graphics.setTitle(String.valueOf(body.getLinearVelocity()));
 		physX.step();
 		physX.debugDraw(camera);
 	}
-
 	@Override
 	public void resize(int width, int height) {
 		camera.viewportHeight = height;
 		camera.viewportWidth = width;
 	}
-
 	@Override
 	public void dispose () {
 		batch.dispose();
-		stand.dispose();
-		run.dispose();
 		music.dispose();
 		sound.dispose();
 		map.dispose();
