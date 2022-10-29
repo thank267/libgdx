@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="8" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="26">
+ <editorsettings>
+  <chunksize width="32" height="32"/>
+ </editorsettings>
+ <tileset firstgid="1" name="map" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
+  <image source="map.png" width="1024" height="1024"/>
+ </tileset>
+ <layer id="1" name="Слой тайлов 1" width="32" height="8">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+874,968,971,970,970,971,942,1019,1006,1006,987,987,975,942,1019,971,971,1006,1006,1019,942,975,975,987,906,973,973,1006,781,781,907,257,
+995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="4" name="env">
+  <object id="8" x="7" y="80" width="246" height="7"/>
+  <object id="9" x="264" y="45" width="279" height="10"/>
+  <object id="10" x="550" y="106" width="472" height="14"/>
+ </objectgroup>
+ <objectgroup id="8" name="dyn">
+  <object id="19" x="193" y="-263" width="24" height="24">
+   <properties>
+    <property name="density" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="20" x="727" y="-286" width="24" height="24">
+   <properties>
+    <property name="density" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="21" x="74" y="-80" width="24" height="24">
+   <properties>
+    <property name="density" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="22" x="173" y="-180" width="66" height="46">
+   <properties>
+    <property name="density" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="23" x="663" y="-200" width="57" height="50">
+   <properties>
+    <property name="density" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="24" x="370" y="-124" width="59" height="38">
+   <properties>
+    <property name="density" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="25" x="865" y="-251" width="69" height="50">
+   <properties>
+    <property name="density" type="float" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="7" name="hero">
+  <object id="17" name="Hero" x="464" y="-197" width="24" height="24">
+   <properties>
+    <property name="density" type="float" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer id="2" name="Слой тайлов 2" width="32" height="8">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,856,856,856,856,856,856,856,856,856,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+856,856,856,856,856,856,856,856,0,887,0,0,887,0,0,887,0,856,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+887,0,0,887,0,0,887,0,0,887,0,0,887,0,0,887,0,856,856,856,856,856,856,856,856,856,856,856,856,856,856,856,
+887,0,0,887,0,0,887,0,0,887,0,0,887,0,0,887,0,0,887,0,0,887,0,0,887,0,0,887,0,0,887,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>
