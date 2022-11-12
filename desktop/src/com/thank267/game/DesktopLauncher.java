@@ -10,6 +10,7 @@ public class DesktopLauncher {
 		config.setForegroundFPS(60);
 		config.setTitle("Thank267 GDX Game");
 		config.setWindowedMode(800,600);
-		new Lwjgl3Application(new Thank267GdxGame(), config);
+		config.setAudioConfig(32, 512, 9);
+		new Lwjgl3Application(new Main(), config);
 	}
 }
