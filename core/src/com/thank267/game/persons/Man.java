@@ -16,7 +16,7 @@ public class Man {
     HashMap<Actions, Animation<TextureRegion>> manAssets;
     private final float FPS = 1/7f;
     private float time;
-    public static boolean canJump;
+    public static boolean canJump, isFire;
     private Animation<TextureRegion> baseAnm;
     private boolean loop;
     private TextureAtlas atl;
@@ -44,20 +44,27 @@ public class Man {
     public boolean isCanJump() {return canJump;}
     public static void setCanJump(boolean isJump) {canJump = isJump;}
     public void setDir(Dir dir){this.dir = dir;}
+    public int getDir(){return (dir == Dir.LEFT)?-1:1;}
     public void setLoop(boolean loop) {this.loop = loop;}
-    public void setFPS(Vector2 vector, boolean onGround) {
+    public Body setFPS(Vector2 vector, boolean onGround) {
         if (vector.x > 0.1f) setDir(Dir.RIGHT);
         if (vector.x < -0.1f) setDir(Dir.LEFT);
         float tmp = (float) (Math.sqrt(vector.x*vector.x + vector.y*vector.y))*10;
         setState(Actions.STAND);
+        if (isFire) {
+            //setState(Actions.SHOOT);
+            return body;
+        }
         if (Math.abs(vector.x) > 0.25f && Math.abs(vector.y) < 10 && onGround) {
             setState(Actions.RUN);
             baseAnm.setFrameDuration(1/tmp);
+            return null;
         }
         if (Math.abs(vector.y) > 1 && canJump) {
-            //setState(Actions.JUMP);
             baseAnm.setFrameDuration(FPS);
+            return null;
         }
+        return null;
     }
 
     public float setTime(float deltaTime) {
