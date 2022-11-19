@@ -40,7 +40,7 @@
    <property name="gravityScale" type="float" value="1"/>
    <property name="restitution" type="float" value="0.25"/>
   </properties>
-  <object id="8" x="7" y="525.348" width="246" height="7">
+  <object id="8" name="stone" x="7" y="525.348" width="246" height="7">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="density" type="float" value="1"/>
@@ -49,7 +49,7 @@
     <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="9" x="264" y="490.348" width="279" height="10">
+  <object id="9" name="stone" x="264" y="490.348" width="279" height="10">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="density" type="float" value="1"/>
@@ -58,7 +58,7 @@
     <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="10" x="550" y="551.348" width="472" height="14">
+  <object id="10" name="stone" x="550" y="551.348" width="472" height="14">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="density" type="float" value="1"/>
@@ -103,7 +103,7 @@
     <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="30" x="545.674" y="495.937" width="8.40792" height="55.4922">
+  <object id="30" name="stone" x="545.674" y="495.937" width="8.40792" height="55.4922">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="density" type="float" value="1"/>
@@ -113,8 +113,53 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="8" name="dyn" visible="0">
-  <object id="19" x="193" y="185" width="24" height="24">
+ <objectgroup id="8" name="dyn">
+  <object id="19" name="coin" x="193" y="185" width="24" height="24">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="3"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="20" name="coin" x="727" y="162" width="24" height="24">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="0.5"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="21" name="coin" x="74" y="368" width="24" height="24">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="2"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="22" name="coin" x="173" y="268" width="66" height="46">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="0.1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="23" name="coin" x="663" y="248" width="57" height="50">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1.1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="24" name="coin" x="370" y="324" width="59" height="38">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
     <property name="density" type="float" value="1"/>
@@ -123,52 +168,7 @@
     <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="20" x="727" y="162" width="24" height="24">
-   <properties>
-    <property name="BodyType" value="DynamicBody"/>
-    <property name="density" type="float" value="1"/>
-    <property name="friction" type="float" value="0"/>
-    <property name="gravityScale" type="float" value="1"/>
-    <property name="restitution" type="float" value="0.25"/>
-   </properties>
-  </object>
-  <object id="21" x="74" y="368" width="24" height="24">
-   <properties>
-    <property name="BodyType" value="DynamicBody"/>
-    <property name="density" type="float" value="1"/>
-    <property name="friction" type="float" value="0"/>
-    <property name="gravityScale" type="float" value="1"/>
-    <property name="restitution" type="float" value="0.25"/>
-   </properties>
-  </object>
-  <object id="22" x="173" y="268" width="66" height="46">
-   <properties>
-    <property name="BodyType" value="DynamicBody"/>
-    <property name="density" type="float" value="1"/>
-    <property name="friction" type="float" value="0"/>
-    <property name="gravityScale" type="float" value="1"/>
-    <property name="restitution" type="float" value="0.25"/>
-   </properties>
-  </object>
-  <object id="23" x="663" y="248" width="57" height="50">
-   <properties>
-    <property name="BodyType" value="DynamicBody"/>
-    <property name="density" type="float" value="1"/>
-    <property name="friction" type="float" value="0"/>
-    <property name="gravityScale" type="float" value="1"/>
-    <property name="restitution" type="float" value="0.25"/>
-   </properties>
-  </object>
-  <object id="24" x="370" y="324" width="59" height="38">
-   <properties>
-    <property name="BodyType" value="DynamicBody"/>
-    <property name="density" type="float" value="1"/>
-    <property name="friction" type="float" value="0"/>
-    <property name="gravityScale" type="float" value="1"/>
-    <property name="restitution" type="float" value="0.25"/>
-   </properties>
-  </object>
-  <object id="25" x="865" y="197" width="69" height="50">
+  <object id="25" name="coin" x="865" y="197" width="69" height="50">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
     <property name="density" type="float" value="1"/>
@@ -178,7 +178,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="7" name="hero" visible="0">
+ <objectgroup id="7" name="hero">
   <properties>
    <property name="BodyType" value="DynamicBody"/>
    <property name="density" type="float" value="1"/>
@@ -191,7 +191,7 @@
     <property name="BodyType" value="DynamicBody"/>
     <property name="density" type="float" value="1"/>
     <property name="friction" type="float" value="0"/>
-    <property name="gravityScale" type="float" value="1"/>
+    <property name="gravityScale" type="float" value="1.3"/>
     <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
