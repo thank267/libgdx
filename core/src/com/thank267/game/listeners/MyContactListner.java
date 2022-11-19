@@ -5,6 +5,7 @@ import com.thank267.game.screens.GameScreen;
 
 public class MyContactListner implements ContactListener {
     public static int cnt=0;
+    public static boolean isDamage=false;
     @Override
     public void beginContact(Contact contact) {
         Fixture a = contact.getFixtureA();
@@ -24,6 +25,13 @@ public class MyContactListner implements ContactListener {
         if (b.getUserData().equals("legs") && a.getUserData().equals("stone")) {
             cnt++;
         }
+
+        if (a.getUserData().equals("legs") && b.getUserData().equals("damage")) {
+            isDamage = true;
+        }
+        if (b.getUserData().equals("legs") && a.getUserData().equals("damage")) {
+            isDamage = true;
+        }
     }
 
     @Override
@@ -36,6 +44,12 @@ public class MyContactListner implements ContactListener {
         }
         if (b.getUserData().equals("legs") && a.getUserData().equals("stone")) {
             cnt--;
+        }
+        if (a.getUserData().equals("legs") && b.getUserData().equals("damage")) {
+            isDamage = false;
+        }
+        if (b.getUserData().equals("legs") && a.getUserData().equals("damage")) {
+            isDamage = false;
         }
     }
 

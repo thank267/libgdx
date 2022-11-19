@@ -23,9 +23,11 @@ public class Man {
     private Body body;
     private Dir dir;
     private static float dScale = 2.8f;
+    private float hitPoints, live;
     public enum Dir{LEFT, RIGHT}
 
     public Man(Body body){
+        hitPoints = live = 100;
         this.body = body;
         manAssets = new HashMap<>();
         atl = new TextureAtlas("atlas/digger.atlas");
@@ -35,7 +37,10 @@ public class Man {
         loop = true;
         dir = Dir.LEFT;
     }
-
+    public float getHit(float damage) {
+        hitPoints -= damage;
+        return hitPoints;
+    }
     public boolean isCanJump() {return canJump;}
     public static void setCanJump(boolean isJump) {canJump = isJump;}
     public void setDir(Dir dir){this.dir = dir;}

@@ -4,12 +4,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class CoinsAnim {
+public class UnitsAnim {
     Texture img;
     Animation<TextureRegion> anm;
     private float time;
 
-    public CoinsAnim(String name, int row, int col, float fps, Animation.PlayMode playMode){
+    public UnitsAnim(String name, int row, int col, float fps, Animation.PlayMode playMode){
         time = 0;
         img = new Texture(name);
         TextureRegion reg1 = new TextureRegion(img);
