@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="22" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="33">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="22" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="36">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -22,9 +22,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,253,254,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,253,254,285,286,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,253,254,285,286,317,318,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 874,968,971,970,970,971,942,1019,1006,1006,987,987,975,942,1019,971,971,1006,1006,1019,942,975,975,987,906,973,973,1006,781,781,907,257,
 995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,995,
@@ -121,6 +121,25 @@
     <property name="restitution" type="float" value="1"/>
    </properties>
   </object>
+  <object id="33" name="stone" x="966.66" y="484.314" width="56.1096" height="10.8282">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="35" name="chain" x="835.738" y="557.158">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0.25"/>
+   </properties>
+   <polyline points="0,0 57.094,-30.5157 104.344,-55.1252 129.938,-68.9065 131.907,-68.9065"/>
+  </object>
  </objectgroup>
  <objectgroup id="8" name="dyn">
   <object id="19" name="coin" x="193" y="185" width="24" height="24">
@@ -132,7 +151,7 @@
     <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="20" name="coin" x="727" y="162" width="24" height="24">
+  <object id="20" name="coin" x="914.032" y="160.031" width="24" height="24">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
     <property name="density" type="float" value="1"/>
@@ -177,7 +196,7 @@
     <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="25" name="coin" x="865" y="197" width="69" height="50">
+  <object id="25" name="coin" x="947.688" y="162.547" width="69" height="50">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
     <property name="density" type="float" value="1"/>

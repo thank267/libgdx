@@ -26,7 +26,7 @@ public class MyContactListner implements ContactListener {
         }
 
         if (a.getUserData().equals("legs") && b.getUserData().equals("stone")) {
-           cnt++;
+            cnt++;
         }
         if (b.getUserData().equals("legs") && a.getUserData().equals("stone")) {
             cnt++;
