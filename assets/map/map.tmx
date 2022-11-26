@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="22" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="31">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="22" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="33">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -40,7 +40,7 @@
    <property name="gravityScale" type="float" value="1"/>
    <property name="restitution" type="float" value="0.25"/>
   </properties>
-  <object id="8" name="stone" x="7" y="525.348" width="246" height="7">
+  <object id="8" name="stone" x="7" y="516.099" width="246" height="7">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="density" type="float" value="1"/>
@@ -49,7 +49,7 @@
     <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="9" name="stone" x="264" y="490.348" width="279" height="10">
+  <object id="9" name="stone" x="264.841" y="483.622" width="279" height="10">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="density" type="float" value="1"/>
@@ -67,7 +67,7 @@
     <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="26" x="0" y="0" width="1024" height="12">
+  <object id="26" name="stone" x="0" y="0" width="1024" height="12">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="density" type="float" value="1"/>
@@ -76,7 +76,7 @@
     <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="27" x="1" y="690" width="1024" height="12">
+  <object id="27" name="stone" x="1" y="690" width="1024" height="12">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="density" type="float" value="1"/>
@@ -85,7 +85,7 @@
     <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="28" x="0" y="1" width="7" height="697">
+  <object id="28" name="stone" x="0" y="1" width="7" height="697">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="density" type="float" value="1"/>
@@ -94,7 +94,7 @@
     <property name="restitution" type="float" value="0.25"/>
    </properties>
   </object>
-  <object id="29" x="1016.5" y="1.5" width="7" height="697">
+  <object id="29" name="stone" x="1016.5" y="1.5" width="7" height="697">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="density" type="float" value="1"/>
@@ -110,6 +110,15 @@
     <property name="friction" type="float" value="0"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+  <object id="32" name="stone" x="250.556" y="485.137" width="8.40792" height="45.4027">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="density" type="float" value="1"/>
+    <property name="friction" type="float" value="1"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="1"/>
    </properties>
   </object>
  </objectgroup>
@@ -193,6 +202,13 @@
     <property name="friction" type="float" value="0"/>
     <property name="gravityScale" type="float" value="1.3"/>
     <property name="restitution" type="float" value="0.25"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="9" name="damage">
+  <object id="31" name="damage" x="739.056" y="518.768" width="21.0198" height="22.7014">
+   <properties>
+    <property name="damage" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

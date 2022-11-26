@@ -20,9 +20,12 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.thank267.game.anim.CoinsAnim;
+import com.thank267.game.anim.UnitsAnim;
+import com.thank267.game.enums.Actions;
 import com.thank267.game.input.Thank267InputProcessor;
+import com.thank267.game.labels.Label;
 import com.thank267.game.listeners.MyContactListner;
+import com.thank267.game.persons.Bullet;
 import com.thank267.game.persons.Man;
 import com.thank267.game.physics.PhysX;
 
@@ -42,12 +45,25 @@ public class GameScreen implements Screen {
     private OrthogonalTiledMapRenderer mapRenderer;
     private int[] front, tL;
     private final Man man;
-    private final CoinsAnim coinAnm;
+    private final UnitsAnim coinAnm;
+    private final UnitsAnim damageAnim;
+
+    private final UnitsAnim fireAnim;
     public static List<Body> bodyToDelete;
+    public static List<Bullet> bullets;
+    private final Label font;
+    private int coins;
+    private int bulletsCnt;
 
     public GameScreen(Game game){
+        bulletsCnt = 100;
+        coins = 0;
+        font = new Label(15);
         bodyToDelete = new ArrayList<>();
-        coinAnm = new CoinsAnim("Full Coinss.png",1,8, 12, Animation.PlayMode.LOOP);
+        bullets = new ArrayList<>();
+        fireAnim = new UnitsAnim("bullet.png",1,6, 15, Animation.PlayMode.LOOP);
+        coinAnm = new UnitsAnim("Full Coinss.png",1,8, 12, Animation.PlayMode.LOOP);
+        damageAnim = new UnitsAnim("damage.png",5, 6, 15, Animation.PlayMode.LOOP);
         this.game = game;
 
         map = new TmxMapLoader().load("map/map.tmx");
@@ -64,6 +80,11 @@ public class GameScreen implements Screen {
         objects.addAll(map.getLayers().get("dyn").getObjects().getByType(RectangleMapObject.class));
         for (int i = 0; i < objects.size; i++) {
             physX.addObject(objects.get(i));
+        }
+        objects.clear();
+        objects.addAll(map.getLayers().get("damage").getObjects().getByType(RectangleMapObject.class));
+        for (int i = 0; i < objects.size; i++) {
+            physX.addDmgObject(objects.get(i));
         }
         body = physX.addObject((RectangleMapObject) map.getLayers().get("hero").getObjects().get("Hero"));
         body.setFixedRotation(true);
@@ -101,9 +122,33 @@ public class GameScreen implements Screen {
 
         man.setTime(delta);
         Vector2 vector = myInputProcessor.getVector();
-        if (MyContactListner.cnt < 1) vector.set(vector.x, 0);
+        Body tBody = man.setFPS(body.getLinearVelocity(), true);
+        if (tBody != null & bulletsCnt>0) {
+            bulletsCnt--;
+            bullets.add(new Bullet(physX, tBody.getPosition().x, tBody.getPosition().y, man.getDir(), fireAnim));
+            vector.set(0, 0);
+        } else if (tBody != null) {
+            vector.set(0, 0);
+            man.setState(Actions.STAND);
+        }
+        if (MyContactListner.cnt < 1) {
+            vector.set(vector.x, 0);
+        }
         body.applyForceToCenter(vector, true);
-        man.setFPS(body.getLinearVelocity(), true);
+
+        ArrayList<Bullet> bTmp = new ArrayList<>();
+        batch.begin();
+        for (Bullet b: bullets) {
+            Body tB = b.update(delta);
+            b.draw(batch);
+            if ( tB != null) {
+                bodyToDelete.add(tB);
+                bTmp.add(b);
+                b.dispose();
+            }
+        }
+        batch.end();
+        bullets.removeAll(bTmp);
 
         Rectangle tmp = man.getRect(camera, man.getFrame());
         ((PolygonShape)body.getFixtureList().get(0).getShape()).setAsBox(tmp.width/2, tmp.height/2);
@@ -114,6 +159,7 @@ public class GameScreen implements Screen {
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
+        font.draw(batch, "HP:"+ man.getHit(0) + " Монет: " + coins, (int)tmp.x,(int)(tmp.y+tmp.height * PhysX.PPM));
         batch.draw(man.getFrame(), tmp.x,tmp.y, tmp.width * PhysX.PPM, tmp.height * PhysX.PPM);
 
         Array<Body> bodys = physX.getBodys("coin");
@@ -128,15 +174,37 @@ public class GameScreen implements Screen {
             ((PolygonShape)bd.getFixtureList().get(0).getShape()).setAsBox(cW/2, cH/2);
             batch.draw(tr, cx,cy, cW * PhysX.PPM, cH * PhysX.PPM);
         }
+        bodys = physX.getBodys("damage");
+        damageAnim.setTime(delta);
+        tr = damageAnim.draw();
+        dScale = 3f;
+        for (Body bd: bodys) {
+            float cx = bd.getPosition().x * PhysX.PPM - tr.getRegionWidth() / 2 / dScale;
+            float cy = bd.getPosition().y * PhysX.PPM - tr.getRegionHeight() / 3/ dScale;
+            float cW = tr.getRegionWidth() / PhysX.PPM / dScale;
+            float cH = tr.getRegionHeight() / PhysX.PPM / dScale;
+            ((PolygonShape)bd.getFixtureList().get(0).getShape()).setAsBox(cW/2, cH/2);
+            batch.draw(tr, cx,cy, cW * PhysX.PPM, cH * PhysX.PPM);
+        }
         batch.end();
 
         mapRenderer.render(front);
 
-        for (Body bd: bodyToDelete) {physX.destroyBody(bd);}
+        for (Body bd: bodyToDelete) {
+            if (bd.getUserData() != null && bd.getUserData().equals("coin")) coins++;
+            if (bd.getUserData() != null && bd.getUserData().equals("bullet")) ;
+
+            physX.destroyBody(bd);}
         bodyToDelete.clear();
 
         physX.step();
         physX.debugDraw(camera);
+        if (MyContactListner.isDamage) {
+            if (man.getHit(1) < 1){
+                dispose();
+                game.setScreen(new GameOverScreen(game));
+            }
+        }
     }
 
     @Override
@@ -163,5 +231,10 @@ public class GameScreen implements Screen {
         sound.dispose();
         map.dispose();
         mapRenderer.dispose();
+        this.man.dispose();
+        this.font.dispose();
+        this.physX.dispose();
+        this.coinAnm.dispose();
+        this.damageAnim.dispose();
     }
 }

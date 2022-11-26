@@ -31,7 +31,7 @@ public class PhysX {
         Iterator<Body> it = tmp.iterator();
         while (it.hasNext()){
             Body body = it.next();
-            if (!body.getUserData().equals("coin")) it.remove();
+            if (!body.getUserData().equals(name)) it.remove();
         }
         return tmp;
     }
@@ -68,6 +68,44 @@ public class PhysX {
             body.getFixtureList().get(1).setSensor(true);
         }
 
+        polygonShape.dispose();
+        return body;
+    }
+    public void addDmgObject(RectangleMapObject object) {
+        Rectangle rect = object.getRectangle();
+        String type = (String) object.getProperties().get("BodyType");
+        BodyDef def = new BodyDef();
+        FixtureDef fdef = new FixtureDef();
+        PolygonShape polygonShape = new PolygonShape();
+
+        def.type = BodyDef.BodyType.StaticBody;
+        def.position.set((rect.x + rect.width/2)/PPM, (rect.y + rect.height/2)/PPM);
+        polygonShape.setAsBox(rect.width/2/PPM, rect.height/2/PPM);
+        fdef.shape = polygonShape;
+
+
+        String name = "damage";
+        Body body;
+        body = world.createBody(def);
+        body.setUserData(name);
+        body.createFixture(fdef).setUserData(name);
+        body.getFixtureList().get(0).setSensor(true);
+        polygonShape.dispose();
+    }
+
+    public Body addBullet(float x, float y) {
+        BodyDef def = new BodyDef();
+        FixtureDef fdef = new FixtureDef();
+        PolygonShape polygonShape = new PolygonShape();
+        def.type = BodyDef.BodyType.DynamicBody;
+        def.position.set(x, y);
+        polygonShape.setAsBox(2/PPM, 2/PPM);
+        fdef.shape = polygonShape;
+        Body body;
+        body = world.createBody(def);
+        body.setUserData("bullet");
+        body.createFixture(fdef).setUserData("bullet");
+        body.getFixtureList().get(0).setSensor(true);
         polygonShape.dispose();
         return body;
     }
