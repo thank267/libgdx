@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -22,6 +23,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.thank267.game.anim.UnitsAnim;
 import com.thank267.game.enums.Actions;
+import com.thank267.game.enums.Types;
 import com.thank267.game.input.Thank267InputProcessor;
 import com.thank267.game.labels.Label;
 import com.thank267.game.listeners.MyContactListner;
@@ -81,6 +83,12 @@ public class GameScreen implements Screen {
         for (int i = 0; i < objects.size; i++) {
             physX.addObject(objects.get(i));
         }
+
+        Array<PolylineMapObject> shape = map.getLayers().get("env").getObjects().getByType(PolylineMapObject.class);
+        for (int i = 0; i < shape.size; i++) {
+            physX.addObject(shape.get(i));
+        }
+
         objects.clear();
         objects.addAll(map.getLayers().get("damage").getObjects().getByType(RectangleMapObject.class));
         for (int i = 0; i < objects.size; i++) {
@@ -132,8 +140,9 @@ public class GameScreen implements Screen {
             man.setState(Actions.STAND);
         }
         if (MyContactListner.cnt < 1) {
-            vector.set(vector.x, 0);
+                vector.set(vector.x, 0);
         }
+
         body.applyForceToCenter(vector, true);
 
         ArrayList<Bullet> bTmp = new ArrayList<>();
@@ -163,6 +172,9 @@ public class GameScreen implements Screen {
         batch.draw(man.getFrame(), tmp.x,tmp.y, tmp.width * PhysX.PPM, tmp.height * PhysX.PPM);
 
         Array<Body> bodys = physX.getBodys("coin");
+        if (bodys.size == 1) {
+            man.setFilter((short) (Types.Coin | Types.Chain | Types.Stone));
+        }
         coinAnm.setTime(delta);
         TextureRegion tr = coinAnm.draw();
         float dScale = 2f;

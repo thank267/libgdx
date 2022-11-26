@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.thank267.game.enums.Actions;
+import com.thank267.game.enums.Types;
 import com.thank267.game.physics.PhysX;
 
 import java.util.HashMap;
@@ -44,6 +46,12 @@ public class Man {
     public boolean isCanJump() {return canJump;}
     public static void setCanJump(boolean isJump) {canJump = isJump;}
     public void setDir(Dir dir){this.dir = dir;}
+    public void setFilter(short f){
+        Filter filter = new Filter();
+        filter.categoryBits = Types.Hero;
+        filter.maskBits = f;
+        body.getFixtureList().get(0).setFilterData(filter);
+    }
     public int getDir(){return (dir == Dir.LEFT)?-1:1;}
     public void setLoop(boolean loop) {this.loop = loop;}
     public Body setFPS(Vector2 vector, boolean onGround) {
