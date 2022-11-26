@@ -3,6 +3,7 @@ package com.thank267.game.input;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
+import com.thank267.game.persons.Man;
 
 public class Thank267InputProcessor implements InputProcessor {
     private Vector2 outForce;
@@ -18,10 +19,10 @@ public class Thank267InputProcessor implements InputProcessor {
         String inKey = Input.Keys.toString(keycode).toUpperCase();
 
         switch (inKey){
-            case "LEFT": outForce.add(-0.25f, 0); break;
-            case  "RIGHT": outForce.add(0.25f, 0); break;
-            case  "DOWN": outForce.add(0, -1.5f); break;
-            case  "SPACE": outForce.add(0, 10.5f); break;
+            case "LEFT": outForce.add(-0.3f, 0); break;
+            case  "RIGHT": outForce.add(0.3f, 0); break;
+            case  "UP": outForce.add(0, 5f); break;
+            case  "SPACE": Man.isFire = true; break;
         }
         return true;
     }
@@ -33,8 +34,9 @@ public class Thank267InputProcessor implements InputProcessor {
         switch (inKey){
             case "LEFT": outForce.set(0, outForce.y); break;
             case  "RIGHT": outForce.set(0, outForce.y); break;
-            case  "DOWN": outForce.set(outForce.x, 0); break;
-            case  "SPACE": outForce.set(outForce.x, 0); break;
+            case  "UP": outForce.set(outForce.x, 0); break;
+            case  "SPACE": Man.isFire = false; break;
+
         }
         return true;
     }

@@ -92,6 +92,23 @@ public class PhysX {
         body.getFixtureList().get(0).setSensor(true);
         polygonShape.dispose();
     }
+
+    public Body addBullet(float x, float y) {
+        BodyDef def = new BodyDef();
+        FixtureDef fdef = new FixtureDef();
+        PolygonShape polygonShape = new PolygonShape();
+        def.type = BodyDef.BodyType.DynamicBody;
+        def.position.set(x, y);
+        polygonShape.setAsBox(2/PPM, 2/PPM);
+        fdef.shape = polygonShape;
+        Body body;
+        body = world.createBody(def);
+        body.setUserData("bullet");
+        body.createFixture(fdef).setUserData("bullet");
+        body.getFixtureList().get(0).setSensor(true);
+        polygonShape.dispose();
+        return body;
+    }
     public void debugDraw(OrthographicCamera camera){debugRenderer.render(world, camera.combined);}
     public void step(){world.step(1/60f, 3, 3);}
 
